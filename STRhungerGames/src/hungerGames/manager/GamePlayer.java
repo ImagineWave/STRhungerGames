@@ -5,7 +5,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 public class GamePlayer {
-	private Player player;
 	public GamePlayer(Player player) {
 		this.player = player;
 		this.points = 0;
@@ -15,12 +14,15 @@ public class GamePlayer {
 		this.nonGameLoc = player.getLocation();
 		this.nonGameInv = player.getInventory();
 	}
-	private Integer points;
-	private boolean isSpectator;
-	private Integer curentVote;
-	private boolean isMod;
+	
+	private Player player;
+	private Integer points = 0;
+	private boolean isSpectator = false;
+	private Integer curentVote = 0;
+	private boolean isMod = false;
 	private Location nonGameLoc;
 	private Inventory nonGameInv;
+	
 	public Player getPlayer() {
 		return player;
 	}

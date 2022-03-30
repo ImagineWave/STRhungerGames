@@ -1,13 +1,33 @@
 package hungerGames.manager;
 
+import hungerGames.listeners.BlockBreakListener;
 import hungerGames.main.Main;
 
 public class GameManager {
-	private Main plugin;
+	private final Main plugin;
 	private GameState gameState = GameState.LOBBY;
-	private PlayerManager playerManager;
+	private final PlayerManager playerManager;
+	private final BlockBreakListener blockBreakListener;
 	private long time;
 	
+	public PlayerManager getPlayerManager() {
+		return playerManager;
+	}
+
+	public BlockBreakListener getBlockBreakListener() {
+		return blockBreakListener;
+	}
+
+	public long getTime() {
+		return time;
+	}
+	
+	public GameManager(Main plugin) {
+		this.plugin = plugin;
+		this.blockBreakListener = new BlockBreakListener(this);
+		this.playerManager = new PlayerManager(this);
+	}
+
 	public void setGameState(GameState gamestate) {
 		switch(gamestate) {
 			case STARTING:{
@@ -22,7 +42,7 @@ public class GameManager {
 				//start countdown task and scoreboard
 				//progressing game
 			}
-			case VOTING:{
+			case PREDM:{
 				//remove walls
 				//give vote tools for all
 				//give vote control instruments to admins

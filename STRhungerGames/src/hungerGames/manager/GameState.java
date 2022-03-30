@@ -1,5 +1,8 @@
 package hungerGames.manager;
 
 public enum GameState {
-	LOBBY,STARTING,ACTIVE,VOTING,ENDING
+	LOBBY,STARTING,ACTIVE,PREDM,DEATHMATCH,ENDING;
+	GameState(){
+		
+	}
 }
