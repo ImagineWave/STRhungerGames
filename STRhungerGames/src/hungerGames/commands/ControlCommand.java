@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import hungerGames.manager.GameManager;
+import hungerGames.manager.GameState;
 import net.md_5.bungee.api.ChatColor;
 
 public class ControlCommand implements CommandExecutor {
@@ -26,7 +27,7 @@ public class ControlCommand implements CommandExecutor {
 	private void typeSelector(CommandSender sender, String[] args) {
 		switch (args[0]) {
 		case ("player"): {
-
+			playerSubcommands(sender, args);
 			break;
 		}
 		case ("gamestate"): {
@@ -84,6 +85,41 @@ public class ControlCommand implements CommandExecutor {
 		}
 		default: {
 
+		}
+		}
+	}
+	
+	private void gamestateSubcommand(CommandSender sender,String[] args) {
+		switch (args[1]) {
+		case("start"):{
+			if( gameManager.canChangeGameSate(GameState.STARTING, sender)) {
+				gameManager.setGameState(GameState.STARTING);
+			}
+			break;
+		}
+		case("end"):{
+			if( gameManager.canChangeGameSate(GameState.ENDING, sender)) {
+				gameManager.setGameState(GameState.ENDING);
+			}
+			break;
+		}
+		case("deathmatch"):{
+			if( gameManager.canChangeGameSate(GameState.DEATHMATCH, sender)) {
+				gameManager.setGameState(GameState.DEATHMATCH);
+			}
+			break;
+		}
+		case("pause"):{
+			if( gameManager.canChangeGameSate(GameState.PAUSED, sender)) {
+				gameManager.setGameState(GameState.PAUSED);
+			}
+			break;
+		}
+		case("resume"):{
+			if( gameManager.canChangeGameSate(GameState.ACTIVE, sender)) {
+				gameManager.setGameState(GameState.ACTIVE);
+			}
+			break;
 		}
 		}
 	}

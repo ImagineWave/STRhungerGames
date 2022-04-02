@@ -3,6 +3,7 @@ package hungerGames.manager;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public class PlayerManager {
@@ -12,16 +13,19 @@ public class PlayerManager {
 	public PlayerManager(GameManager gameManager) {
 		this.gameManager = gameManager;
 	}
-	public PlayerManager() {
-		
-	}
 	public void addPlayer(Player p) {
 		GamePlayer player = new GamePlayer(p);
 		this.listOfPlayers.add(player);
+		p.getInventory().clear();
+		Location lobbyLoc = gameManager.getTeleportManager().getLobbyLoc();
+		p.teleport(lobbyLoc);//TODO
 	}
 	public void removePlayer(Player p) {
 		String playerName = p.getName();
 		GamePlayer pToRemove = getGamePlayerByName(playerName);
+		p.getInventory().clear();
+		Location nonGameLoc = pToRemove.getNonGameLoc();
+		p.teleport(nonGameLoc);
 		this.listOfPlayers.remove(pToRemove);
 	}
 	

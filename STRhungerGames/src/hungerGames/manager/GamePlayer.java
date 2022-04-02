@@ -3,6 +3,7 @@ package hungerGames.manager;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 public class GamePlayer {
 	public GamePlayer(Player player) {
@@ -12,7 +13,10 @@ public class GamePlayer {
 		this.curentVote = 0;
 		this.isMod = false;
 		this.nonGameLoc = player.getLocation();
-		this.nonGameInv = player.getInventory();
+		this.items = player.getInventory().getContents();
+		this.armor = player.getInventory().getArmorContents();
+		this.leftHand =  player.getInventory().getItemInOffHand();
+		this.exp = player.getLevel();
 	}
 	
 	private Player player;
@@ -21,7 +25,10 @@ public class GamePlayer {
 	private Integer curentVote = 0;
 	private boolean isMod = false;
 	private Location nonGameLoc;
-	private Inventory nonGameInv;
+	private ItemStack[] items;
+	private ItemStack[] armor;
+	private ItemStack leftHand;
+	private Integer exp;
 	
 	public Player getPlayer() {
 		return player;
@@ -59,10 +66,28 @@ public class GamePlayer {
 	public void setNonGameLoc(Location nonGameLoc) {
 		this.nonGameLoc = nonGameLoc;
 	}
-	public Inventory getNonGameInv() {
-		return nonGameInv;
+	public ItemStack[] getItems() {
+		return items;
 	}
-	public void setNonGameInv(Inventory nonGameInv) {
-		this.nonGameInv = nonGameInv;
+	public void setItems(ItemStack[] items) {
+		this.items = items;
+	}
+	public ItemStack[] getArmor() {
+		return armor;
+	}
+	public void setArmor(ItemStack[] armor) {
+		this.armor = armor;
+	}
+	public ItemStack getLeftHand() {
+		return leftHand;
+	}
+	public void setLeftHand(ItemStack leftHand) {
+		this.leftHand = leftHand;
+	}
+	public Integer getExp() {
+		return exp;
+	}
+	public void setExp(Integer exp) {
+		this.exp = exp;
 	}
 }
