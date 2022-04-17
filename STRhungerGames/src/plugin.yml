@@ -1,0 +1,9 @@
+name: strHungerGames
+main: hungerGames.main.Main
+description: test4
+version: 1.0
+api-version: 1.13
+commands:
+    hgcontrol:
+        usage:
+        aliases: [hgc]
