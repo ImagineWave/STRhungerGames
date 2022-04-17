@@ -13,21 +13,47 @@ public class GameManager {
 	private final PlayerManager playerManager;
 	private final BlockBreakListener blockBreakListener;
 	private final TeleportManager teleportManager;
-	private long time;
+	private int time;
+	private int activeTimeSec;
+	private int timeBeforeGlowing;
+	private int deathmatchTimeSec;
 	
 	public PlayerManager getPlayerManager() {
 		return playerManager;
 	}
-	
 	public BlockBreakListener getBlockBreakListener() {
 		return blockBreakListener;
 	}
 	public TeleportManager getTeleportManager() {
 		return teleportManager;
 	}
-	public long getTime() {
+	
+	
+	public int getTime() {
 		return time;
 	}
+	public void setTime(int time) {
+		this.time = time;
+	}
+	public int getActiveTimeSec() {
+		return activeTimeSec;
+	}
+	public void setActiveTimeSec(int activeTimeSec) {
+		this.activeTimeSec = activeTimeSec;
+	}
+	public int getTimeBeforeGlowing() {
+		return timeBeforeGlowing;
+	}
+	public void setTimeBeforeGlowing(int timeBeforeGlowing) {
+		this.timeBeforeGlowing = timeBeforeGlowing;
+	}
+	public int getDeathmatchTimeSec() {
+		return deathmatchTimeSec;
+	}
+	public void setDeathmatchTimeSec(int deathmatchTimeSec) {
+		this.deathmatchTimeSec = deathmatchTimeSec;
+	}
+	
 	
 	public GameManager(Main plugin) {
 		this.plugin = plugin;

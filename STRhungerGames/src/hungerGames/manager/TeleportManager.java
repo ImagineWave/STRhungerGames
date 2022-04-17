@@ -19,7 +19,7 @@ public class TeleportManager {
 		this.plugin = plugin;
 	}
 
-	public void addOneLocCounters(String name) {
+	private void addOneLocCounters(String name) {
 		File file = new File(plugin.getDataFolder() + File.separator + "Locations.yml");
 		FileConfiguration f = YamlConfiguration.loadConfiguration(file);
 		Integer count = f.getInt("amount." + name);
@@ -47,13 +47,36 @@ public class TeleportManager {
 			e1.printStackTrace();
 		}
 	}
+	public void removeLocFromConfig1(String name) {
+		File file = new File(plugin.getDataFolder() + File.separator + "Locations.yml");
+		FileConfiguration f = YamlConfiguration.loadConfiguration(file);
+		f.set("locations." + name + ".world", null);
+		f.set("locations." + name + ".x", null);
+		f.set("locations." + name + ".y", null);
+		f.set("locations." + name + ".z", null);
+		try {
+			f.save(file);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	public void removeLocFromConfig2(String name) {
+		File file = new File(plugin.getDataFolder() + File.separator + "Locations.yml");
+		FileConfiguration f = YamlConfiguration.loadConfiguration(file);
+		f.set("locations." + name, null);
+		try {
+			f.save(file);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
 	public Location getLocation (String name) {
 		 File file = new File(plugin.getDataFolder() + File.separator + "Locations.yml");
 		 FileConfiguration f = YamlConfiguration.loadConfiguration(file);
 		 Location loc = new Location(Bukkit.getServer().getWorld(f.getString("locations." + name + ".world")),
-				f.getDouble("locations." + name + ".x"),
+				f.getDouble("locations." + name + ".x")+0.5d,
 				f.getDouble("locations." + name + ".y"),
-				f.getDouble("locations." + name + ".z"));
+				f.getDouble("locations." + name + ".z")+0.5d);
 		return loc;
 	}
 	public void setLobbyLoc(Location loc) {
@@ -70,19 +93,19 @@ public class TeleportManager {
 		return getLocation("spectate");
 	}
 	
-	public void setStartingLoc(Location loc) {
+	public void addStartingLoc(Location loc) {
 		Integer count = getLocCounters("starting");
 		locToConfig(loc, "starting" + count.toString());
 		addOneLocCounters("starting");
 	}
 
-	public void setDeathmatchLoc(Location loc) {
+	public void addDeathmatchLoc(Location loc) {
 		Integer count = getLocCounters("deathmatch");
 		locToConfig(loc, "deathmatch" + count.toString());
 		addOneLocCounters("deathmatch");
 	}
 
-	public List<Location> listOfLocsByName(String name) {
+	public List<Location> getListOfLocsByName(String name) {
 		Integer count = getLocCounters(name);
 		List<Location> list = new ArrayList<>();
 		for(int i = 0; i<count; i++) {
@@ -90,5 +113,13 @@ public class TeleportManager {
 		}
 		return list;
 	}
-	
+	public void clearListOfLocsByName(String name) {
+		File file = new File(plugin.getDataFolder() + File.separator + "Locations.yml");
+		FileConfiguration f = YamlConfiguration.loadConfiguration(file);
+		Integer count = f.getInt("amount." + name);
+		for(int i = 0; i<count; i++) {
+			removeLocFromConfig1("deathmatch" + count.toString());
+		}
+		f.set("amount." + name, null);
+	}
 }
